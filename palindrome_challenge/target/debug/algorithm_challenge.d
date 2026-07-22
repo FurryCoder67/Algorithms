@@ -1,1 +1,1 @@
-C:\Users\aiden\Documents\Code\Algorithms\algorithm_challenge\target\debug\algorithm_challenge.exe: C:\Users\aiden\Documents\Code\Algorithms\algorithm_challenge\src\main.rs
+C:\Users\aiden\documents\code\algorithms\palindrome_challenge\target\debug\algorithm_challenge.exe: C:\Users\aiden\documents\code\algorithms\palindrome_challenge\src\main.rs
