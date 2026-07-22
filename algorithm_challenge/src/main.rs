@@ -1,3 +1,12 @@
+fn main() {
+    println!("{}", palindrome("racecar".into()));
+    println!("{}", palindrome("poop".into()));
+    println!("{}", palindrome("something".into()));
+    println!("{}", palindrome("racecarbobracecar".into()));
+    println!("{}", palindrome("poop".into()));
+    println!("{}", palindrome("something".into()));
+    println!("{}", palindrome("raceca".into()));
+}
 fn palindrome(s: String) -> i32 {
     // Make this algorithm return a number that is the amount of palindromic substrings
     let mut count = 0;
@@ -12,9 +21,4 @@ fn palindrome(s: String) -> i32 {
         }
     }
     count
-}
-fn main() {
-    println!("{}", palindrome("racecar".into()));
-    println!("{}", palindrome("poop".into()));
-    println!("{}", palindrome("something".into()));
 }
