@@ -17,6 +17,7 @@ fn palindrome(s: String) -> i32 {
             let substring = &s[i..j];
             let reversed = substring.chars().rev().collect::<String>();
             if substring == reversed && substring.len() > 1 {
+                println!("Found palindrome: {}", substring);
                 count += 1;
             }
         }
