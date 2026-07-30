@@ -1,0 +1,60 @@
+    Blocking waiting for file lock on package cache
+    Blocking waiting for file lock on package cache
+   0.020791100s  INFO prepare_target{force=false package_id=contrast_Rating v0.1.0 (C:\Users\aiden\Documents\Code\Algorithms\contrast_rating) target="contrast_Rating"}: cargo::core::compiler::fingerprint: fingerprint error for contrast_Rating v0.1.0 (C:\Users\aiden\Documents\Code\Algorithms\contrast_rating)/Check { test: false }/TargetInner { name: "contrast_Rating", doc: true, ..: with_path("C:\\Users\\aiden\\Documents\\Code\\Algorithms\\contrast_rating\\src\\main.rs", Edition2024) }
+   0.020833900s  INFO prepare_target{force=false package_id=contrast_Rating v0.1.0 (C:\Users\aiden\Documents\Code\Algorithms\contrast_rating) target="contrast_Rating"}: cargo::core::compiler::fingerprint:     err: failed to read `C:\Users\aiden\Documents\Code\Algorithms\contrast_rating\target\debug\.fingerprint\contrast_Rating-b73cd49f9488e417\bin-contrast_Rating`
+
+Caused by:
+    The system cannot find the file specified. (os error 2)
+
+Stack backtrace:
+   0: git_midx_writer_dump
+   1: git_midx_writer_dump
+   2: git_midx_writer_dump
+   3: git_midx_writer_dump
+   4: git_filter_source_repo
+   5: git_filter_source_repo
+   6: git_filter_source_repo
+   7: git_filter_source_repo
+   8: git_filter_source_repo
+   9: git_filter_source_repo
+  10: git_filter_source_repo
+  11: git_libgit2_prerelease
+  12: <unknown>
+  13: <unknown>
+  14: <unknown>
+  15: <unknown>
+  16: git_midx_writer_dump
+  17: git_filter_source_repo
+  18: git_midx_writer_dump
+  19: BaseThreadInitThunk
+  20: RtlUserThreadStart
+   0.038752800s  INFO prepare_target{force=false package_id=contrast_Rating v0.1.0 (C:\Users\aiden\Documents\Code\Algorithms\contrast_rating) target="contrast_Rating"}: cargo::core::compiler::fingerprint: fingerprint error for contrast_Rating v0.1.0 (C:\Users\aiden\Documents\Code\Algorithms\contrast_rating)/Check { test: true }/TargetInner { name: "contrast_Rating", doc: true, ..: with_path("C:\\Users\\aiden\\Documents\\Code\\Algorithms\\contrast_rating\\src\\main.rs", Edition2024) }
+   0.038793100s  INFO prepare_target{force=false package_id=contrast_Rating v0.1.0 (C:\Users\aiden\Documents\Code\Algorithms\contrast_rating) target="contrast_Rating"}: cargo::core::compiler::fingerprint:     err: failed to read `C:\Users\aiden\Documents\Code\Algorithms\contrast_rating\target\debug\.fingerprint\contrast_Rating-13371cb49d0770d1\test-bin-contrast_Rating`
+
+Caused by:
+    The system cannot find the file specified. (os error 2)
+
+Stack backtrace:
+   0: git_midx_writer_dump
+   1: git_midx_writer_dump
+   2: git_midx_writer_dump
+   3: git_midx_writer_dump
+   4: git_filter_source_repo
+   5: git_filter_source_repo
+   6: git_filter_source_repo
+   7: git_filter_source_repo
+   8: git_filter_source_repo
+   9: git_filter_source_repo
+  10: git_filter_source_repo
+  11: git_libgit2_prerelease
+  12: <unknown>
+  13: <unknown>
+  14: <unknown>
+  15: <unknown>
+  16: git_midx_writer_dump
+  17: git_filter_source_repo
+  18: git_midx_writer_dump
+  19: BaseThreadInitThunk
+  20: RtlUserThreadStart
+    Checking contrast_Rating v0.1.0 (C:\Users\aiden\Documents\Code\Algorithms\contrast_rating)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.48s
