@@ -1,25 +1,31 @@
 fn is_magic(grid: &[[i32; 3]; 3]) -> bool {
     let target = grid[0][0] + grid[0][1] + grid[0][2];
+
     for row in 0..3 {
         let sum = grid[row][0] + grid[row][1] + grid[row][2];
         if sum != target {
             return false;
         }
     }
+
     for col in 0..3 {
         let sum = grid[0][col] + grid[1][col] + grid[2][col];
         if sum != target {
             return false;
         }
     }
+
     let diag1 = grid[0][0] + grid[1][1] + grid[2][2];
     let diag2 = grid[0][2] + grid[1][1] + grid[2][0];
+
     diag1 == target && diag2 == target
 }
+
 fn solve_magic_square(mut grid: [[i32; 3]; 3]) -> String {
     let mut zero_row = 0;
     let mut zero_col = 0;
     let mut found = false;
+
     for r in 0..3 {
         for c in 0..3 {
             if grid[r][c] == 0 {
@@ -29,26 +35,38 @@ fn solve_magic_square(mut grid: [[i32; 3]; 3]) -> String {
             }
         }
     }
+
     if !found {
-        if is_magic(&grid) {
-            return "valid".to_string();
+        return if is_magic(&grid) {
+            "valid".to_string()
         } else {
-            return "impossible".to_string();
-        }
+            "impossible".to_string()
+        };
     }
-    for candidate in -1000..=1000 {
-        if candidate == 0 {
-            continue;
-        }
 
-        grid[zero_row][zero_col] = candidate;
+    let mut target = None;
 
-        if is_magic(&grid) {
-            return candidate.to_string();
+    for r in 0..3 {
+        if r != zero_row {
+            target = Some(grid[r][0] + grid[r][1] + grid[r][2]);
+            break;
         }
     }
 
-    "impossible".to_string()
+    let target = target.unwrap();
+
+    let current_sum =
+        grid[zero_row][0] + grid[zero_row][1] + grid[zero_row][2];
+
+    let missing = target - current_sum;
+
+    grid[zero_row][zero_col] = missing;
+
+    if is_magic(&grid) {
+        missing.to_string()
+    } else {
+        "impossible".to_string()
+    }
 }
 
 fn main() {
@@ -61,10 +79,6 @@ fn main() {
     ];
 
     for (i, test) in tests.iter().enumerate() {
-        println!(
-            "Test {}: {}",
-            i + 1,
-            solve_magic_square(*test)
-        );
+        println!("Test {}: {}", i + 1, solve_magic_square(*test));
     }
 }
