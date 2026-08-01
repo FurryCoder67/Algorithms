@@ -18,7 +18,7 @@ fn play_game(player1: &str, player2: &str) -> [i32; 2] {
             ('C', 'D') => {
                 score2 += 5;
             }
-            _ => {}
+            _ => {  }
         }
     }
 
