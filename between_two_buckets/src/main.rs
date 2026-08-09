@@ -54,5 +54,5 @@ fn main() {
         [68, 163, 123]
     );
 
-    println!("All tests passed!");
+    println!("Piglets Mouth is too fat");
 }
