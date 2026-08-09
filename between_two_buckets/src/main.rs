@@ -9,9 +9,7 @@ fn mix_paint(a: Bucket, b: Bucket) -> [i32; 3] {
 
     [
         ((a.color[0] * a.fullness + b.color[0] * b.fullness) as f64 / total_fullness as f64).round() as i32,
-
         ((a.color[1] * a.fullness + b.color[1] * b.fullness) as f64 / total_fullness as f64).round() as i32,
-
         ((a.color[2] * a.fullness + b.color[2] * b.fullness) as f64 / total_fullness as f64).round() as i32,
     ]
 }
