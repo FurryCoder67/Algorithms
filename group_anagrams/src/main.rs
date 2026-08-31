@@ -1,12 +1,15 @@
 // given an array of strings, group anagrams together. You can return the answer in any order.
 
+
 fn group_anagrams(strs: Vec<String>) -> Vec<Vec<String>> {
     let mut anagrams: Vec<Vec<String>> = Vec::new();
     for s in strs {
         let mut found = false;
         for group in &mut anagrams {
-            if is_anagram(&s, &group[0]) {
-                group.push(s.clone());
+            // scope doesnt work with &s, so we need to clone it
+            let s_clone = s.clone();
+            if is_anagram(&s_clone, &group[0]) {
+                group.push(s_clone);
                 found = true;
                 break;
             }
