@@ -10,7 +10,7 @@ fn valid_anagram(s: String, t: String) -> bool {
     t_chars.sort_unstable();
     s_chars == t_chars
 }
-//testing
+// testing
 fn main() {
     let s = String::from("anagram");
     let t = String::from("nagaram");
