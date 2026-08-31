@@ -1,7 +1,5 @@
 // given an array of strings, group anagrams together. You can return the answer in any order.
 
-
-
 fn is_anagram(s1: &str, s2: &str) -> bool {
     let mut chars1: Vec<char> = s1.chars().collect();
     let mut chars2: Vec<char> = s2.chars().collect();
@@ -16,7 +14,6 @@ fn group_anagrams(strs: Vec<String>) -> Vec<Vec<String>> {
         let mut found = false;
         for group in &mut anagrams {
             let s_clone = s.clone();
-            // is_anagram funtionn not defined. need to define it now.
             if is_anagram(&s_clone, &group[0]) {
                 group.push(s_clone);
                 found = true;
