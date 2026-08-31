@@ -28,7 +28,6 @@ fn group_anagrams(strs: Vec<String>) -> Vec<Vec<String>> {
 
 //need fn main
 fn main() {
-    // need to add tests here
     let strs = vec![
         String::from("eat"),
         String::from("tea"),
