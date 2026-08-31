@@ -13,5 +13,7 @@ fn contains_duplicate(nums: Vec<i32>) -> bool {
 //tests
 fn main() {
     let nums = vec![1, 2, 3, 4, 5];
+    let nums2 = vec![1, 1, 3, 4, 5];
     println!("{}", contains_duplicate(nums));
+    println!("{}", contains_duplicate(nums2));
 }
