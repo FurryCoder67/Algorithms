@@ -36,6 +36,7 @@ fn main() {
         String::from("nat"),
         String::from("bat"),
     ];
+    
     let result = group_anagrams(strs);
     println!("{:?}", result);
 }
