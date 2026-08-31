@@ -28,15 +28,26 @@ fn group_anagrams(strs: Vec<String>) -> Vec<Vec<String>> {
 }
 
 // testing
-fn main() {
-    let strs = vec![
-        String::from("eat"),
-        String::from("tea"),
-        String::from("tan"),
-        String::from("ate"),
-        String::from("nat"),
-        String::from("bat"),
-    ];
-    let result = group_anagrams(strs);
-    println!("{:?}", result);
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_group_anagrams() {
+        let strs = vec![
+            String::from("eat"),
+            String::from("tea"),
+            String::from("tan"),
+            String::from("ate"),
+            String::from("nat"),
+            String::from("bat"),
+        ];
+        let result = group_anagrams(strs);
+        assert_eq!(result.len(), 3);
+    }
+    #[test]
+    fn test_is_anagram() {
+        assert!(is_anagram("eat", "tea"));
+        assert!(!is_anagram("eat", "tan"));
+    }
 }
