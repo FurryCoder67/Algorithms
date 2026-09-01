@@ -1,26 +1,43 @@
-use std::collections::HashMap;
-
-fn frequent_elements(nums: Vec<i32>, k: usize) -> Vec<i32> {
-    let mut counts = HashMap::new();
-    for num in nums {
-        *counts.entry(num).or_insert(0) += 1;
-    }
-    let mut elements: Vec<(i32, i32)> = counts.into_iter().collect();
-    let n = elements.len();
+// No HashMap: extra space is O(k) (the `top` buffer) instead of O(distinct values).
+// Traded away for time: sorting in place is O(n^2) instead of O(n) hashing.
+fn frequent_elements(mut nums: Vec<i32>, k: usize) -> Vec<i32> {
+    let n = nums.len();
     let k = k.min(n);
 
-    for i in 0..k {
-        for j in (i + 1..n).rev() {
-            if elements[j].1 > elements[j - 1].1 {
-                elements.swap(j, j - 1);
+    // In-place bubble sort so equal values end up adjacent, with no second buffer.
+    for i in 0..n {
+        for j in 0..n - 1 - i {
+            if nums[j] > nums[j + 1] {
+                nums.swap(j, j + 1);
             }
         }
     }
 
-    elements.truncate(k);
-    elements.shrink_to_fit();
+    // Only the k best (value, count) pairs seen so far are kept, sorted ascending by count
+    // so the current cutoff to beat is always at index 0.
+    let mut top: Vec<(i32, i32)> = Vec::with_capacity(k);
 
-    elements.into_iter().map(|(value, _)| value).collect()
+    let mut i = 0;
+    while i < n {
+        let value = nums[i];
+        let mut count = 0;
+        while i < n && nums[i] == value {
+            count += 1;
+            i += 1;
+        }
+
+        if top.len() < k {
+            let pos = top.partition_point(|&(_, c)| c < count);
+            top.insert(pos, (value, count));
+        } else if count > top[0].1 {
+            top.remove(0);
+            let pos = top.partition_point(|&(_, c)| c < count);
+            top.insert(pos, (value, count));
+        }
+    }
+
+    top.reverse();
+    top.into_iter().map(|(value, _)| value).collect()
 }
 
 fn main() {
