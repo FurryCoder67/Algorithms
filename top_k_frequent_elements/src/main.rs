@@ -12,11 +12,9 @@ fn frequent_elements(nums: Vec<i32>, k: usize) -> Vec<i32> {
     elements.sort_by(|a, b| b.1.cmp(&a.1));
     // Take the first k numbers.
     let mut result = Vec::new();
-
     for i in 0..k.min(elements.len()) {
         result.push(elements[i].0);
     }
-
     result
 }
 
