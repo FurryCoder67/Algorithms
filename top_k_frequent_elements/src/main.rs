@@ -1,5 +1,5 @@
 use std::collections::HashMap;
-
+// make code more simple and more efficient
 fn frequent_elements(nums: Vec<i32>, k: usize) -> Vec<i32> {
     let mut counts = HashMap::new();
     for num in nums {
