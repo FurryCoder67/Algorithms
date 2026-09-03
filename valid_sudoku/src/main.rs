@@ -1,47 +1,76 @@
 use std::collections::HashSet;
 
-fn valid_sudoku(board: Vec<Vec<char>>) -> bool {
-    for row in 0..9 {
-        let mut seen = HashSet::new();
+struct SudokuBoard {
+    board: Vec<Vec<char>>,
+}
 
-        for col in 0..9 {
-            let value = board[row][col];
-
-            if value != '.' && !seen.insert(value) {
-                return false;
-            }
-        }
+impl SudokuBoard {
+    fn new(board: Vec<Vec<char>>) -> Self {
+        Self { board }
     }
 
-    for col in 0..9 {
-        let mut seen = HashSet::new();
+    fn is_valid(&self) -> bool {
+        self.are_rows_valid()
+            && self.are_columns_valid()
+            && self.are_boxes_valid()
+    }
 
+    fn are_rows_valid(&self) -> bool {
         for row in 0..9 {
-            let value = board[row][col];
-
-            if value != '.' && !seen.insert(value) {
+            if !self.is_group_valid(
+                (0..9).map(|col| self.board[row][col])
+            ) {
                 return false;
             }
         }
+
+        true
     }
 
-    for box_row in (0..9).step_by(3) {
-        for box_col in (0..9).step_by(3) {
-            let mut seen = HashSet::new();
+    fn are_columns_valid(&self) -> bool {
+        for col in 0..9 {
+            if !self.is_group_valid(
+                (0..9).map(|row| self.board[row][col])
+            ) {
+                return false;
+            }
+        }
 
-            for row in box_row..box_row + 3 {
-                for col in box_col..box_col + 3 {
-                    let value = board[row][col];
+        true
+    }
 
-                    if value != '.' && !seen.insert(value) {
-                        return false;
-                    }
+    fn are_boxes_valid(&self) -> bool {
+        for box_row in (0..9).step_by(3) {
+            for box_col in (0..9).step_by(3) {
+                let values = (box_row..box_row + 3)
+                    .flat_map(|row| {
+                        (box_col..box_col + 3)
+                            .map(move |col| self.board[row][col])
+                    });
+
+                if !self.is_group_valid(values) {
+                    return false;
                 }
             }
         }
+
+        true
     }
 
-    true
+    fn is_group_valid<I>(&self, values: I) -> bool
+    where
+        I: IntoIterator<Item = char>,
+    {
+        let mut seen = HashSet::new();
+
+        for value in values {
+            if value != '.' && !seen.insert(value) {
+                return false;
+            }
+        }
+
+        true
+    }
 }
 
 fn main() {
@@ -65,23 +94,30 @@ fn main() {
         vec!['4', '.', '.', '8', '.', '3', '.', '.', '1'],
         vec!['7', '.', '.', '.', '2', '.', '.', '.', '6'],
         vec!['.', '6', '.', '.', '.', '.', '2', '8', '.'],
-        vec!['.', '.', '.', '4', '1', '9', '.', '.', '5'],
+        vec!['.', '.', '.', '4', '1', '9', '.', '.', '.', '5'],
         vec!['.', '.', '.', '.', '8', '.', '.', '7', '9'],
     ];
 
-    assert!(valid_sudoku(valid_board));
-    assert!(!valid_sudoku(invalid_board));
-    println!("All tests passed!")
+    let valid_sudoku = SudokuBoard::new(valid_board);
+    let invalid_sudoku = SudokuBoard::new(invalid_board);
+
+    assert!(valid_sudoku.is_valid());
+    assert!(!invalid_sudoku.is_valid());
+
+    println!("All tests passed!");
 }
 
 #[cfg(test)]
 mod tests {
     use super::*;
 
-    fn create_board(rows: [&str; 9]) -> Vec<Vec<char>> {
-        rows.iter()
-            .map(|r| r.chars().collect())
-            .collect()
+    fn create_board(rows: [&str; 9]) -> SudokuBoard {
+        let board = rows
+            .iter()
+            .map(|row| row.chars().collect())
+            .collect();
+
+        SudokuBoard::new(board)
     }
 
     #[test]
@@ -97,7 +133,8 @@ mod tests {
             "...419..5",
             "....8..79",
         ]);
-        assert!(valid_sudoku(board));
+
+        assert!(board.is_valid());
     }
 
     #[test]
@@ -113,7 +150,8 @@ mod tests {
             ".........",
             ".........",
         ]);
-        assert!(valid_sudoku(board));
+
+        assert!(board.is_valid());
     }
 
     #[test]
@@ -129,7 +167,8 @@ mod tests {
             "...419..5",
             "....8..79",
         ]);
-        assert!(!valid_sudoku(board));
+
+        assert!(!board.is_valid());
     }
 
     #[test]
@@ -145,7 +184,8 @@ mod tests {
             "...419..5",
             "....8..79",
         ]);
-        assert!(!valid_sudoku(board));
+
+        assert!(!board.is_valid());
     }
 
     #[test]
@@ -161,6 +201,7 @@ mod tests {
             "...419..5",
             "....8..79",
         ]);
-        assert!(!valid_sudoku(board));
+
+        assert!(!board.is_valid());
     }
 }
