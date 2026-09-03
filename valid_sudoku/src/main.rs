@@ -71,6 +71,7 @@ fn main() {
 
     assert!(valid_sudoku(valid_board));
     assert!(!valid_sudoku(invalid_board));
+    println!("All tests passed!")
 }
 
 #[cfg(test)]
