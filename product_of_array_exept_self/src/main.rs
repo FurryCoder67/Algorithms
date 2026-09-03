@@ -11,7 +11,6 @@ fn array_product(nums: Vec<i32>) -> Vec<i32> {
         answer[i] *= suffix;
         suffix *= nums[i];
     }
-
     answer
 }
 
