@@ -44,3 +44,93 @@ fn valid_sudoku(board: Vec<Vec<char>>) -> bool {
     true
 }
 
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    fn create_board(rows: [&str; 9]) -> Vec<Vec<char>> {
+        rows.iter()
+            .map(|r| r.chars().collect())
+            .collect()
+    }
+
+    #[test]
+    fn test_valid_board() {
+        let board = create_board([
+            "53..7....",
+            "6..195...",
+            ".98....6.",
+            "8...6...3",
+            "4..8.3..1",
+            "7...2...6",
+            ".6....28.",
+            "...419..5",
+            "....8..79",
+        ]);
+        assert!(valid_sudoku(board));
+    }
+
+    #[test]
+    fn test_empty_board() {
+        let board = create_board([
+            ".........",
+            ".........",
+            ".........",
+            ".........",
+            ".........",
+            ".........",
+            ".........",
+            ".........",
+            ".........",
+        ]);
+        assert!(valid_sudoku(board));
+    }
+
+    #[test]
+    fn test_duplicate_in_row() {
+        let board = create_board([
+            "53..7...5",
+            "6..195...",
+            ".98....6.",
+            "8...6...3",
+            "4..8.3..1",
+            "7...2...6",
+            ".6....28.",
+            "...419..5",
+            "....8..79",
+        ]);
+        assert!(!valid_sudoku(board));
+    }
+
+    #[test]
+    fn test_duplicate_in_column() {
+        let board = create_board([
+            "53..7....",
+            "6..195...",
+            "598....6.",
+            "8...6...3",
+            "4..8.3..1",
+            "7...2...6",
+            ".6....28.",
+            "...419..5",
+            "....8..79",
+        ]);
+        assert!(!valid_sudoku(board));
+    }
+
+    #[test]
+    fn test_duplicate_in_3x3_subgrid() {
+        let board = create_board([
+            "53..7....",
+            "6..195...",
+            ".58....6.",
+            "8...6...3",
+            "4..8.3..1",
+            "7...2...6",
+            ".6....28.",
+            "...419..5",
+            "....8..79",
+        ]);
+        assert!(!valid_sudoku(board));
+    }
+}
