@@ -1,7 +1,6 @@
 use std::collections::HashSet;
 
 fn valid_sudoku(board: Vec<Vec<char>>) -> bool {
-    // Check rows
     for row in 0..9 {
         let mut seen = HashSet::new();
 
@@ -14,7 +13,6 @@ fn valid_sudoku(board: Vec<Vec<char>>) -> bool {
         }
     }
 
-    // Check columns
     for col in 0..9 {
         let mut seen = HashSet::new();
 
@@ -27,7 +25,6 @@ fn valid_sudoku(board: Vec<Vec<char>>) -> bool {
         }
     }
 
-    // Check 3x3 boxes
     for box_row in (0..9).step_by(3) {
         for box_col in (0..9).step_by(3) {
             let mut seen = HashSet::new();
